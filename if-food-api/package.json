@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "jest --clearCache && jest --coverage=false --verbose",
     "lint": "eslint --ext .ts,.js -c eslint.config.mjs src",
     "lint-fix": "eslint --ext .ts,.js -c eslint.config.mjs src --fix",
     "format": "prettier --write src"
