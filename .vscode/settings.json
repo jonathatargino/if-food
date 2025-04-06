@@ -10,8 +10,5 @@
     ],
     "[prisma]": {
         "editor.defaultFormatter": "Prisma.prisma"
-    },
-    "eslint.workingDirectories": [
-        "./if-food-api",
-    ]
+    }
 }
