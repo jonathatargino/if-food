@@ -12,6 +12,9 @@
         "format": "prettier --write src",
         "build": "tsc && tsc-alias"
     },
+    "prisma": {
+        "schema": "src/database/prisma/schema/schema.prisma"
+    },
     "keywords": [],
     "author": "",
     "license": "ISC",
@@ -30,8 +33,10 @@
         "typescript-eslint": "^8.28.0"
     },
     "dependencies": {
+        "@prisma/client": "^6.6.0",
         "@types/express": "^5.0.1",
         "express": "^4.21.2",
-        "express-async-errors": "^3.1.1"
+        "express-async-errors": "^3.1.1",
+        "prisma": "^6.6.0"
     }
 }
