@@ -6,4 +6,5 @@ export interface CreateUserDto {
     password: string;
     role: UserRole;
     description?: string;
+    phone: string;
 }

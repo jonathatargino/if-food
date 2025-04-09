@@ -7,6 +7,7 @@ export interface User extends BaseEntity {
     password: string;
     role: UserRole;
     description?: string;
+    phone: string;
 }
 
 export enum UserRole {
