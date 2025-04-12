@@ -1,8 +1,7 @@
 import { User } from "../../models/user";
-import { authCookieHandler } from "../../utils/cookies/auth";
 import { Api, Method } from "./api";
 
-interface LoginResponse {
+export interface LoginResponse {
     user: User;
     token: string;
 }
@@ -22,13 +21,11 @@ class AuthApi extends Api {
         return response.data;
     }
 
-    public async verify(): Promise<void> {
-        const token = authCookieHandler.getToken();
-
+    public async verify(token: string): Promise<void> {
         await this.request({
             method: Method.POST,
             urlExtension: "verify",
-            payload: { headers: { Authorization: token } },
+            payload: { body: { token } },
         });
     }
 }

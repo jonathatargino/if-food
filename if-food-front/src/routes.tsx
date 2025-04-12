@@ -1,19 +1,30 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import { LoginPage } from "./pages/login-page";
 import { RegisterPage } from "./pages/register-page";
 import { HomePage } from "./pages/home-page";
+import { Guest } from "./components/guest";
 
 export const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <HomePage />,
-    },
     {
         path: "/login",
         element: <LoginPage />,
     },
     {
-        path: "/register",
+        path: "/cadastro",
         element: <RegisterPage />,
+    },
+    {
+        path: "/",
+        element: (
+            <Guest>
+                <Outlet />
+            </Guest>
+        ),
+        children: [
+            {
+                path: "",
+                element: <HomePage />,
+            },
+        ],
     },
 ]);
