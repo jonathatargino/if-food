@@ -7,4 +7,5 @@ export interface CreateUserDto {
     role: UserRole;
     description?: string;
     phone: string;
+    studyCourse: string;
 }

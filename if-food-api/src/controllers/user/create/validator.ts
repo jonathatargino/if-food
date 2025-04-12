@@ -10,6 +10,7 @@ export const bodySchema = yup.object().shape({
     role: yup.string().oneOf(Object.values(UserRole)).required(),
     description: yup.string().optional(),
     phone: yup.string().required(),
+    studyCourse: yup.string().required(),
 });
 
 export type CreateUserRequest = Request<{}, {}, yup.InferType<typeof bodySchema>>;
