@@ -1,6 +1,6 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
 import { LoginPage } from "./pages/login";
-import { RegisterPage } from "./pages/register-page";
+import { RegisterPage } from "./pages/register";
 import { HomePage } from "./pages/home-page";
 import { Guest } from "./components/guest";
 

@@ -12,7 +12,7 @@ import {
     Paper,
     Link,
 } from "@mui/material";
-import { LockOutlined, EmailOutlined } from "@mui/icons-material";
+import { LockOutlined } from "@mui/icons-material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth";
 import { LoginFormData, schema } from "./schema";
@@ -92,13 +92,6 @@ export const LoginPage = () => {
                         {...register("email")}
                         error={!!errors.email}
                         helperText={errors.email?.message}
-                        slotProps={{
-                            input: {
-                                startAdornment: (
-                                    <EmailOutlined sx={{ mr: 1, color: "action.active" }} />
-                                ),
-                            },
-                        }}
                     />
                     <TextField
                         fullWidth
@@ -108,13 +101,6 @@ export const LoginPage = () => {
                         {...register("password")}
                         error={!!errors.password}
                         helperText={errors.password?.message}
-                        slotProps={{
-                            input: {
-                                startAdornment: (
-                                    <LockOutlined sx={{ mr: 1, color: "action.active" }} />
-                                ),
-                            },
-                        }}
                     />
                     <Button
                         type="submit"
