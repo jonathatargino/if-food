@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import {
     Box,
     Button,
@@ -15,20 +14,8 @@ import {
 } from "@mui/material";
 import { LockOutlined, EmailOutlined } from "@mui/icons-material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/auth";
-
-interface LoginFormData {
-    email: string;
-    password: string;
-}
-
-const schema = yup.object().shape({
-    email: yup.string().email("Email inválido").required("Email é obrigatório"),
-    password: yup
-        .string()
-        .min(6, "A senha deve ter pelo menos 6 caracteres")
-        .required("Senha é obrigatória"),
-});
+import { useAuth } from "../../contexts/auth";
+import { LoginFormData, schema } from "./schema";
 
 export const LoginPage = () => {
     const [showSuccess, setShowSuccess] = useState(false);
@@ -95,36 +82,38 @@ export const LoginPage = () => {
 
                 <Box
                     component="form"
-                    onSubmit={handleSubmit(onSubmit, console.log)}
-                    sx={{ mt: 1, width: "100%" }}>
+                    onSubmit={handleSubmit(onSubmit)}
+                    sx={{ mt: 1, width: "100%", display: "flex", flexDirection: "column", gap: 2 }}>
                     <TextField
-                        margin="normal"
                         fullWidth
-                        id="email"
                         label="Email"
                         autoComplete="email"
                         autoFocus
                         {...register("email")}
                         error={!!errors.email}
                         helperText={errors.email?.message}
-                        InputProps={{
-                            startAdornment: (
-                                <EmailOutlined sx={{ mr: 1, color: "action.active" }} />
-                            ),
+                        slotProps={{
+                            input: {
+                                startAdornment: (
+                                    <EmailOutlined sx={{ mr: 1, color: "action.active" }} />
+                                ),
+                            },
                         }}
                     />
                     <TextField
-                        margin="normal"
                         fullWidth
                         label="Senha"
                         type="password"
-                        id="password"
                         autoComplete="current-password"
                         {...register("password")}
                         error={!!errors.password}
                         helperText={errors.password?.message}
-                        InputProps={{
-                            startAdornment: <LockOutlined sx={{ mr: 1, color: "action.active" }} />,
+                        slotProps={{
+                            input: {
+                                startAdornment: (
+                                    <LockOutlined sx={{ mr: 1, color: "action.active" }} />
+                                ),
+                            },
                         }}
                     />
                     <Button
@@ -147,7 +136,7 @@ export const LoginPage = () => {
                     <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
                         <Link
                             component={RouterLink}
-                            to="/register"
+                            to="/cadastro"
                             variant="body2"
                             sx={{ color: "#2f9e3f" }}>
                             Criar conta
