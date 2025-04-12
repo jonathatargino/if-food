@@ -17,14 +17,32 @@ export function makeUserRepository(model = prisma.user): UserRepository {
             });
         },
 
-        async findAll() {
-            const users = await model.findMany({ where: { deletedAt: null } });
+        async findAll(filters) {
+            const users = await model.findMany({
+                where: {
+                    deletedAt: null,
+                    name: { contains: filters.name, mode: "insensitive" },
+                    role: filters.role,
+                },
+                skip: (filters.page - 1) * filters.itemsPerPage,
+                take: filters.itemsPerPage,
+            });
 
             return users.map(mapUserToDomain);
         },
 
         async findByEmail(email) {
             const user = await model.findUnique({ where: { email, deletedAt: null } });
+
+            if (!user) {
+                return null;
+            }
+
+            return mapUserToDomain(user);
+        },
+
+        async findByPhone(phone) {
+            const user = await model.findUnique({ where: { phone, deletedAt: null } });
 
             if (!user) {
                 return null;
