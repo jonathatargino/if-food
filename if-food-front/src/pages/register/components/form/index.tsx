@@ -15,9 +15,11 @@ import { LoadingButton } from "../../../../components/form/loading-button";
 import { applyPhoneMask } from "../../../../utils/masks/phone";
 import { MaskedTextfield } from "../../../../components/form/masked-textfield";
 import { handleRequestError } from "../../../../utils/errors/handle-request-error";
+import Confetti from "react-confetti";
 
 export function RegisterForm() {
     const [isLoading, setIsLoading] = useState(false);
+    const [showConfetti, setShowConfetti] = useState(false);
     const navigate = useNavigate();
 
     const form = useForm<RegisterFormData>({
@@ -38,10 +40,14 @@ export function RegisterForm() {
                 password: data.password,
                 role: data.is_seller ? UserRole.Seller : UserRole.Customer,
             });
+            setShowConfetti(true);
             enqueueSnackbar({
                 message: `Obrigado por se cadastrar, ${user.name}! Faça login para prosseguir`,
                 variant: "success",
             });
+
+            await new Promise((resolve) => setTimeout(resolve, 5000));
+
             navigate("/login");
         } catch (error) {
             handleRequestError(error, enqueueSnackbar);
@@ -138,6 +144,7 @@ export function RegisterForm() {
                     </Grid>
                 </Grid>
             </Box>
+            {showConfetti && <Confetti gravity={0.3} />}
         </FormProvider>
     );
 }
