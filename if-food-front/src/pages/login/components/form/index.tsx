@@ -52,12 +52,18 @@ export function LoginForm() {
                     flexDirection: "column",
                     gap: 2,
                 }}>
-                <ControlledTextField name="email" label="Email" isDisabled={isLoading} />
+                <ControlledTextField
+                    name="email"
+                    label="Email"
+                    isDisabled={isLoading}
+                    placeholder="laricamonstra@gmail.com"
+                />
                 <ControlledTextField
                     name="password"
                     label="Senha"
                     type="password"
                     isDisabled={isLoading}
+                    placeholder="********"
                 />
                 <LoadingButton isLoading={isLoading} loadingText="Entrando">
                     Entrar

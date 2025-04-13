@@ -8,6 +8,7 @@ interface ControlledTextfieldProps {
     sx?: SxProps;
     type?: InputHTMLAttributes<HTMLInputElement>["type"];
     isDisabled?: boolean;
+    placeholder?: string;
 }
 
 export function ControlledTextField({
@@ -16,6 +17,7 @@ export function ControlledTextField({
     type = "text",
     sx = {},
     isDisabled,
+    placeholder,
 }: ControlledTextfieldProps) {
     const {
         register,
@@ -27,11 +29,13 @@ export function ControlledTextField({
             fullWidth
             label={label}
             autoComplete={name}
+            placeholder={placeholder}
             type={type}
             error={!!errors[name]}
             helperText={errors[name]?.message as string}
             disabled={isDisabled}
             sx={sx}
+            slotProps={{ inputLabel: { shrink: true } }}
             {...register(name)}
         />
     );

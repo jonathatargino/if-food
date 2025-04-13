@@ -31,7 +31,15 @@ export function ControlledSelect({
             name={name}
             render={({ field, formState }) => (
                 <FormControl fullWidth error={!!formState.errors.study_course}>
-                    <InputLabel id={labelId}>{label}</InputLabel>
+                    <InputLabel
+                        shrink
+                        id={labelId}
+                        sx={{
+                            background: "white",
+                            paddingRight: 0.5,
+                        }}>
+                        {label}
+                    </InputLabel>
                     <Select
                         fullWidth
                         {...field}

@@ -3,7 +3,7 @@ import { RegisterFormData, schema } from "./schema";
 import { FormProvider, useForm } from "react-hook-form";
 import { UserRole } from "../../../../models/user";
 import { userApi } from "../../../../services/if-food-api/user";
-import { Box, Button, CircularProgress, Grid, Link, Stack } from "@mui/material";
+import { Box, Grid, Link } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { ControlledTextField } from "../../../../components/form/controlled-textfield";
 import { ControlledSelect } from "../../../../components/form/controlled-select";
@@ -58,22 +58,42 @@ export function RegisterForm() {
                 sx={{ mt: 1, width: "100%" }}>
                 <Grid container spacing={2}>
                     <Grid size={{ xs: 12 }}>
-                        <ControlledTextField name="name" label="Nome" isDisabled={isLoading} />
-                    </Grid>
-                    <Grid size={{ xs: 12 }}>
                         <ControlledTextField
-                            name="phone"
-                            label="Telefone"
-                            type="phone"
+                            name="name"
+                            label="Nome*"
                             isDisabled={isLoading}
+                            placeholder="Ricardo Corbucci"
                         />
                     </Grid>
                     <Grid size={{ xs: 12 }}>
-                        <ControlledTextField name="email" label="Email" isDisabled={isLoading} />
+                        <ControlledTextField
+                            name="email"
+                            label="Email*"
+                            isDisabled={isLoading}
+                            placeholder="laricamonstra@gmail.com"
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }}>
+                        <ControlledTextField
+                            name="password"
+                            label="Senha*"
+                            type="password"
+                            isDisabled={isLoading}
+                            placeholder="********"
+                        />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }}>
+                        <ControlledTextField
+                            name="password_confirmation"
+                            label="Confirmar senha*"
+                            type="password"
+                            isDisabled={isLoading}
+                            placeholder="********"
+                        />
                     </Grid>
                     <Grid size={{ xs: 12 }}>
                         <ControlledSelect
-                            label="Curso"
+                            label="Curso*"
                             name="study_course"
                             options={studyCourseOptions}
                             isDisabled={isLoading}
@@ -81,21 +101,20 @@ export function RegisterForm() {
                     </Grid>
                     <Grid size={{ xs: 12, sm: 6 }}>
                         <ControlledTextField
-                            name="password"
-                            label="Senha"
-                            type="password"
+                            name="phone"
+                            label="Telefone*"
+                            type="phone"
                             isDisabled={isLoading}
+                            placeholder={"(85) 98002-8922"}
                         />
                     </Grid>
-                    <Grid size={{ xs: 12, sm: 6 }}>
-                        <ControlledTextField
-                            name="password_confirmation"
-                            label="Confirmar senha"
-                            type="password"
-                            isDisabled={isLoading}
-                        />
-                    </Grid>
-                    <Grid size={{ xs: 12 }}>
+                    <Grid
+                        size={{ xs: 12, sm: 6 }}
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}>
                         <ControlledSwitch
                             label="Sou vendedor"
                             name="is_seller"
