@@ -6,8 +6,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginFormData, schema } from "./schema";
 import { ControlledTextField } from "../../../../components/form/controlled-textfield";
 import { useSnackbar } from "notistack";
+import { useState } from "react";
+import { LoadingButton } from "../../../../components/form/loading-button";
 
 export function LoginForm() {
+    const [isLoading, setIsLoading] = useState(false);
+
     const { login } = useAuth();
     const { enqueueSnackbar } = useSnackbar();
     const navigate = useNavigate();
@@ -17,6 +21,8 @@ export function LoginForm() {
     });
 
     const onSubmit = async (data: LoginFormData) => {
+        setIsLoading(true);
+
         try {
             const user = await login(data.email, data.password);
             enqueueSnackbar({
@@ -30,6 +36,8 @@ export function LoginForm() {
                 variant: "error",
             });
         }
+
+        setIsLoading(false);
     };
 
     return (
@@ -44,24 +52,16 @@ export function LoginForm() {
                     flexDirection: "column",
                     gap: 2,
                 }}>
-                <ControlledTextField name="email" label="Email" />
-                <ControlledTextField name="password" label="Senha" type="password" />
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{
-                        mt: 3,
-                        mb: 2,
-                        py: 1.5,
-                        bgcolor: "#2f9e3f",
-                        "&:hover": {
-                            bgcolor: "#2f9e3f",
-                            opacity: 0.9,
-                        },
-                    }}>
+                <ControlledTextField name="email" label="Email" isDisabled={isLoading} />
+                <ControlledTextField
+                    name="password"
+                    label="Senha"
+                    type="password"
+                    isDisabled={isLoading}
+                />
+                <LoadingButton isLoading={isLoading} loadingText="Entrando">
                     Entrar
-                </Button>
+                </LoadingButton>
             </Box>
         </FormProvider>
     );

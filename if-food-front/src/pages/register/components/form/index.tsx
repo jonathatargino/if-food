@@ -11,6 +11,7 @@ import { studyCourseOptions } from "./constants";
 import { ControlledSwitch } from "../../../../components/form/controlled-switch";
 import { useSnackbar } from "notistack";
 import { useState } from "react";
+import { LoadingButton } from "../../../../components/form/loading-button";
 
 export function RegisterForm() {
     const [isLoading, setIsLoading] = useState(false);
@@ -102,29 +103,9 @@ export function RegisterForm() {
                         />
                     </Grid>
                 </Grid>
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    disabled={isLoading}
-                    sx={{
-                        mt: 3,
-                        mb: 2,
-                        py: 1.5,
-                        bgcolor: "#2f9e3f",
-                        "&:hover": {
-                            bgcolor: "#2f9e3f",
-                            opacity: 0.9,
-                        },
-                    }}>
-                    {isLoading ? (
-                        <Stack gap={2} flexDirection="row" alignItems="center">
-                            Criando conta <CircularProgress size={18} />
-                        </Stack>
-                    ) : (
-                        <>Criar Conta</>
-                    )}
-                </Button>
+                <LoadingButton isLoading={isLoading} loadingText="Criando conta">
+                    Criar Conta
+                </LoadingButton>
 
                 <Grid container justifyContent="center">
                     <Grid>
