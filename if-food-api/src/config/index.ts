@@ -5,6 +5,7 @@ interface ServerConfig {
     env: string;
     keepAliveTimeout: number;
     headersTimeout: number;
+    jwtSecret: string;
 }
 
 export const serverConfig: ServerConfig = {
@@ -12,4 +13,5 @@ export const serverConfig: ServerConfig = {
     env: parseStringEnviromentVariable("NODE_ENV", "development"),
     keepAliveTimeout: parseIntegerEnviromentVariable("SERVER_KEEP_ALIVE_TIMEOUT", 61 * 1000),
     headersTimeout: parseIntegerEnviromentVariable("SERVER_HEADERS_TIMEOUT", 62 * 1000),
+    jwtSecret: parseStringEnviromentVariable("JWT_SECRET", "my-secret-key"),
 };
