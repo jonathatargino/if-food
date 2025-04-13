@@ -18,8 +18,10 @@ export const serverConfig: ServerConfig = {
 
 interface FrontConfig {
     origin: string;
+    origin2: string;
 }
 
 export const frontConfig: FrontConfig = {
     origin: parseStringEnviromentVariable("FRONTEND_ORIGIN", "http://localhost:5173"),
+    origin2: parseStringEnviromentVariable("FRONTEND_ORIGIN_2", "http://localhost:5173"),
 };

@@ -12,7 +12,7 @@ export function buildApp() {
 
     app.use(
         cors({
-            origin: frontConfig.origin,
+            origin: [frontConfig.origin, frontConfig.origin2],
         }),
     );
     app.use("/api/v1", getV1Routes());
