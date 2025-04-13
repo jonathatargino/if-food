@@ -12,6 +12,8 @@ import { ControlledSwitch } from "../../../../components/form/controlled-switch"
 import { useSnackbar } from "notistack";
 import { useState } from "react";
 import { LoadingButton } from "../../../../components/form/loading-button";
+import { applyPhoneMask } from "../../../../utils/masks/phone";
+import { MaskedTextfield } from "../../../../components/form/masked-textfield";
 
 export function RegisterForm() {
     const [isLoading, setIsLoading] = useState(false);
@@ -100,12 +102,13 @@ export function RegisterForm() {
                         />
                     </Grid>
                     <Grid size={{ xs: 12, sm: 6 }}>
-                        <ControlledTextField
+                        <MaskedTextfield
                             name="phone"
                             label="Telefone*"
                             type="phone"
                             isDisabled={isLoading}
                             placeholder={"(85) 98002-8922"}
+                            maskFn={applyPhoneMask}
                         />
                     </Grid>
                     <Grid

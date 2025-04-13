@@ -2,7 +2,7 @@ import { SxProps, TextField } from "@mui/material";
 import { InputHTMLAttributes } from "react";
 import { useFormContext } from "react-hook-form";
 
-interface ControlledTextfieldProps {
+export interface ControlledTextfieldProps {
     name: string;
     label: string;
     sx?: SxProps;

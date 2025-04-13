@@ -14,7 +14,12 @@ export const schema = yup.object().shape({
     name: yup.string().required("Nome é obrigatório"),
     email: yup.string().email("Email inválido").required("Email é obrigatório"),
     study_course: yup.string().required("Curso é obrigatório"),
-    phone: yup.string().required("Telefone é obrigatório"),
+    phone: yup
+        .string()
+        .required("Telefone é obrigatório")
+        .test("phone should have 11 digits", "Telefone incompleto", (value) => {
+            return value.replace(/\D/g, "").length === 11;
+        }),
     password: yup
         .string()
         .min(6, "A senha deve ter pelo menos 6 caracteres")
