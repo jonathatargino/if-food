@@ -4,25 +4,12 @@ import { FormProvider, useForm } from "react-hook-form";
 import { UserRole } from "../../../../models/user";
 import { userApi } from "../../../../services/if-food-api/user";
 import { useState } from "react";
-import {
-    Alert,
-    Box,
-    Button,
-    FormControl,
-    FormControlLabel,
-    Grid,
-    InputLabel,
-    Link,
-    MenuItem,
-    Select,
-    Snackbar,
-    Switch,
-    Typography,
-} from "@mui/material";
+import { Alert, Box, Button, Grid, Link, Snackbar } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { ControlledTextField } from "../../../../components/form/controlled-textfield";
 import { ControlledSelect } from "../../../../components/form/controlled-select";
 import { studyCourseOptions } from "./constants";
+import { ControlledSwitch } from "../../../../components/form/controlled-switch";
 
 export function RegisterForm() {
     const [showSuccess, setShowSuccess] = useState(false);
@@ -31,7 +18,7 @@ export function RegisterForm() {
     const navigate = useNavigate();
 
     const form = useForm<RegisterFormData>({
-        resolver: yupResolver(schema) as any,
+        resolver: yupResolver(schema),
     });
 
     const onSubmit = async (data: RegisterFormData) => {
@@ -90,11 +77,7 @@ export function RegisterForm() {
                         />
                     </Grid>
                     <Grid size={{ xs: 12 }}>
-                        <FormControlLabel
-                            control={<Switch {...form.register("is_seller")} color="success" />}
-                            label="Sou vendedor"
-                            sx={{ mt: 2, mb: 2 }}
-                        />
+                        <ControlledSwitch label="Sou vendedor" name="is_seller" />
                     </Grid>
                 </Grid>
                 <Button

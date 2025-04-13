@@ -31,7 +31,7 @@ export function ControlledSelect({ label, name, options, sx = {} }: ControlledSe
                         ))}
                     </Select>
                     {formState.errors[name] && (
-                        <Typography variant="caption" color="error">
+                        <Typography variant="caption" color="error" marginLeft={2}>
                             {formState.errors[name]?.message as string}
                         </Typography>
                     )}
