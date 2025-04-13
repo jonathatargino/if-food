@@ -11,9 +11,16 @@ interface ControlledSelectProps {
     label: string;
     options: SelectOption[] | Readonly<SelectOption[]>;
     sx?: SxProps;
+    isDisabled?: boolean;
 }
 
-export function ControlledSelect({ label, name, options, sx = {} }: ControlledSelectProps) {
+export function ControlledSelect({
+    label,
+    name,
+    options,
+    sx = {},
+    isDisabled,
+}: ControlledSelectProps) {
     const { control } = useFormContext();
 
     const labelId = `${name}-label`;
@@ -25,7 +32,13 @@ export function ControlledSelect({ label, name, options, sx = {} }: ControlledSe
             render={({ field, formState }) => (
                 <FormControl fullWidth error={!!formState.errors.study_course}>
                     <InputLabel id={labelId}>{label}</InputLabel>
-                    <Select fullWidth {...field} labelId={labelId} sx={sx} label={label}>
+                    <Select
+                        fullWidth
+                        {...field}
+                        labelId={labelId}
+                        sx={sx}
+                        label={label}
+                        disabled={isDisabled}>
                         {options.map((option) => (
                             <MenuItem value={option.value}>{option.label}</MenuItem>
                         ))}

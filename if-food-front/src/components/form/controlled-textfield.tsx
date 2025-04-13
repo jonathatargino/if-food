@@ -7,6 +7,7 @@ interface ControlledTextfieldProps {
     label: string;
     sx?: SxProps;
     type?: InputHTMLAttributes<HTMLInputElement>["type"];
+    isDisabled?: boolean;
 }
 
 export function ControlledTextField({
@@ -14,6 +15,7 @@ export function ControlledTextField({
     label,
     type = "text",
     sx = {},
+    isDisabled,
 }: ControlledTextfieldProps) {
     const {
         register,
@@ -28,6 +30,7 @@ export function ControlledTextField({
             type={type}
             error={!!errors[name]}
             helperText={errors[name]?.message as string}
+            disabled={isDisabled}
             sx={sx}
             {...register(name)}
         />
