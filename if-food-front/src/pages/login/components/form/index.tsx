@@ -8,6 +8,7 @@ import { ControlledTextField } from "../../../../components/form/controlled-text
 import { useSnackbar } from "notistack";
 import { useState } from "react";
 import { LoadingButton } from "../../../../components/form/loading-button";
+import { handleRequestError } from "../../../../utils/errors/handle-request-error";
 
 export function LoginForm() {
     const [isLoading, setIsLoading] = useState(false);
@@ -30,11 +31,8 @@ export function LoginForm() {
                 variant: "success",
             });
             navigate("/");
-        } catch {
-            enqueueSnackbar({
-                message: "Ocorreu um erro. Por favor, tente novamente.",
-                variant: "error",
-            });
+        } catch (error) {
+            handleRequestError(error, enqueueSnackbar);
         }
 
         setIsLoading(false);
