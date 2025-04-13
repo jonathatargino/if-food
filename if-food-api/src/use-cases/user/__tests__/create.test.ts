@@ -1,4 +1,4 @@
-import { UserRole } from "@domain/user";
+import { User, UserRole } from "@domain/user";
 import { makeCreateUser } from "../create";
 import { UseCaseError } from "@utils/errors";
 
@@ -20,7 +20,7 @@ describe("createUser", () => {
             password: "123456",
             role: UserRole.Customer,
             phone: "80028922",
-        };
+        } as User;
 
         const createUser = makeCreateUser(
             userRepositoryMock.create,
@@ -50,7 +50,7 @@ describe("createUser", () => {
             password: "123456",
             role: UserRole.Customer,
             phone: mockPhone,
-        };
+        } as User;
 
         const createUser = makeCreateUser(
             userRepositoryMock.create,
@@ -68,7 +68,7 @@ describe("createUser", () => {
             password: "123456",
             role: UserRole.Customer,
             phone: "80028922",
-        };
+        } as User;
 
         const expectedUser = {
             ...userDataMock,

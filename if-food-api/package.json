@@ -10,7 +10,7 @@
         "lint": "eslint --ext .ts,.js -c eslint.config.mjs src",
         "lint-fix": "eslint --ext .ts,.js -c eslint.config.mjs src --fix",
         "format": "prettier --write src",
-        "build": "tsc && tsc-alias"
+        "build": "prisma generate && cross-env ./node_modules/typescript/bin/tsc && tsc-alias"
     },
     "prisma": {
         "schema": "src/database/prisma/schema/schema.prisma"

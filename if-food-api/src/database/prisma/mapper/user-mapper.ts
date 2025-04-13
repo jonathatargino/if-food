@@ -13,5 +13,6 @@ export function mapUserToDomain(user: PrismaUser): DomainUser {
         role: user.role as DomainUser["role"],
         description: user.description || undefined,
         phone: user.phone,
+        studyCourse: user.studyCourse,
     };
 }
