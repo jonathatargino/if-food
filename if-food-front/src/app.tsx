@@ -1,11 +1,20 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes";
 import { AuthProvider } from "./contexts/auth/auth-context";
+import { SnackbarProvider } from "notistack";
 
 export function App() {
     return (
-        <AuthProvider>
-            <RouterProvider router={router} />
-        </AuthProvider>
+        <>
+            <SnackbarProvider
+                anchorOrigin={{
+                    horizontal: "center",
+                    vertical: "bottom",
+                }}>
+                <AuthProvider>
+                    <RouterProvider router={router} />
+                </AuthProvider>
+            </SnackbarProvider>
+        </>
     );
 }

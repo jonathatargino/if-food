@@ -1,18 +1,15 @@
-import { Alert, Box, Button, Snackbar } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { useAuth } from "../../../../contexts/auth";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginFormData, schema } from "./schema";
 import { ControlledTextField } from "../../../../components/form/controlled-textfield";
+import { useSnackbar } from "notistack";
 
 export function LoginForm() {
-    const [showSuccess, setShowSuccess] = useState(false);
-    const [showError, setShowError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
-
     const { login } = useAuth();
+    const { enqueueSnackbar } = useSnackbar();
     const navigate = useNavigate();
 
     const form = useForm<LoginFormData>({
@@ -21,12 +18,17 @@ export function LoginForm() {
 
     const onSubmit = async (data: LoginFormData) => {
         try {
-            await login(data.email, data.password);
-            setShowSuccess(true);
+            const user = await login(data.email, data.password);
+            enqueueSnackbar({
+                message: `Seja bem-vindo de volta, ${user.name} :)`,
+                variant: "success",
+            });
             navigate("/");
         } catch {
-            setErrorMessage("Ocorreu um erro. Por favor, tente novamente.");
-            setShowError(true);
+            enqueueSnackbar({
+                message: "Ocorreu um erro. Por favor, tente novamente.",
+                variant: "error",
+            });
         }
     };
 
@@ -61,20 +63,6 @@ export function LoginForm() {
                     Entrar
                 </Button>
             </Box>
-            <Snackbar
-                open={showSuccess}
-                autoHideDuration={6000}
-                onClose={() => setShowSuccess(false)}>
-                <Alert severity="success" sx={{ width: "100%" }}>
-                    Bem-vindo de volta! Login realizado com sucesso.
-                </Alert>
-            </Snackbar>
-
-            <Snackbar open={showError} autoHideDuration={6000} onClose={() => setShowError(false)}>
-                <Alert severity="error" sx={{ width: "100%" }}>
-                    {errorMessage}
-                </Alert>
-            </Snackbar>
         </FormProvider>
     );
 }

@@ -15,6 +15,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
         authCookieHandler.setToken(JSON.stringify(response));
         setUser(response.user);
+
+        return response.user;
     }
 
     async function verifyUserAuthentication() {
