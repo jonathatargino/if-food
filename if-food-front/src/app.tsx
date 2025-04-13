@@ -10,6 +10,9 @@ export function App() {
                 anchorOrigin={{
                     horizontal: "center",
                     vertical: "bottom",
+                }}
+                style={{
+                    maxWidth: "552px",
                 }}>
                 <AuthProvider>
                     <RouterProvider router={router} />
