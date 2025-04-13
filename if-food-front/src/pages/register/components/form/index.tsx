@@ -46,14 +46,14 @@ export function RegisterForm() {
                 variant: "success",
             });
 
+            setIsLoading(false);
             await new Promise((resolve) => setTimeout(resolve, 5000));
 
             navigate("/login");
         } catch (error) {
             handleRequestError(error, enqueueSnackbar);
+            setIsLoading(false);
         }
-
-        setIsLoading(false);
     };
     return (
         <FormProvider {...form}>
