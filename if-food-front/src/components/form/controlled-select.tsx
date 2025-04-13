@@ -46,7 +46,14 @@ export function ControlledSelect({
                         labelId={labelId}
                         sx={sx}
                         label={label}
-                        disabled={isDisabled}>
+                        disabled={isDisabled}
+                        MenuProps={{
+                            PaperProps: {
+                                style: {
+                                    maxHeight: 200,
+                                },
+                            },
+                        }}>
                         {options.map((option) => (
                             <MenuItem value={option.value}>{option.label}</MenuItem>
                         ))}
