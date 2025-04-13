@@ -15,6 +15,7 @@ export async function create(req: CreateUserRequest, res: Response) {
                     ptBr: error.metadata.ptBr,
                     en: error.message,
                 },
+                code: error.metadata.code,
             });
             return;
         }

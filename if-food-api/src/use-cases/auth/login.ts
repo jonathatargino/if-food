@@ -2,6 +2,7 @@ import { serverConfig } from "@config/index";
 import { userRepository } from "@database/prisma/repositories/user";
 import { UserRepository } from "@domain/user/repository";
 import { UseCaseError } from "@utils/errors";
+import { ErrorCodesEnum } from "@utils/errors/codes";
 import { compareSync } from "bcrypt";
 import * as jwt from "jsonwebtoken";
 
@@ -13,6 +14,7 @@ export function makeLogin(findUserByEmail: UserRepository["findByEmail"]) {
             throw new UseCaseError("Password or email is incorrect", "login", {
                 email: email,
                 ptBr: "Email ou senha estão incorretos",
+                code: ErrorCodesEnum.WrongPasswordOrEmail,
             });
         }
 
@@ -22,6 +24,7 @@ export function makeLogin(findUserByEmail: UserRepository["findByEmail"]) {
             throw new UseCaseError("Password or email is incorrect", "login", {
                 email: email,
                 ptBr: "Email ou senha estão incorretos",
+                code: ErrorCodesEnum.WrongPasswordOrEmail,
             });
         }
 

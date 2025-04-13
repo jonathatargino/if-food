@@ -1,5 +1,8 @@
+import { ErrorCodesEnum } from "./codes";
+
 type UseCaseErrorMetadata = {
     ptBr: string;
+    code?: ErrorCodesEnum;
     [key: string]: unknown;
 };
 

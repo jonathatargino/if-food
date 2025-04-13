@@ -17,6 +17,7 @@ export async function login(req: LoginRequest, res: Response) {
                     ptBr: error.metadata.ptBr,
                     en: error.message,
                 },
+                code: error.metadata.code,
             });
             return;
         }

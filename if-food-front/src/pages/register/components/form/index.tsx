@@ -14,6 +14,12 @@ import { useState } from "react";
 import { LoadingButton } from "../../../../components/form/loading-button";
 import { applyPhoneMask } from "../../../../utils/masks/phone";
 import { MaskedTextfield } from "../../../../components/form/masked-textfield";
+import { AxiosError } from "axios";
+import {
+    defaultErrorMessage,
+    errorCodeMessages,
+    ErrorCodesEnum,
+} from "../../../../utils/error-codes";
 
 export function RegisterForm() {
     const [isLoading, setIsLoading] = useState(false);
@@ -42,12 +48,25 @@ export function RegisterForm() {
                 variant: "success",
             });
             navigate("/login");
-        } catch {
-            enqueueSnackbar({
-                message:
-                    "Ocorreu um erro ao criar sua conta. Por favor, tente novamente. Se o problema persistir, contate o suporte",
-                variant: "error",
-            });
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                const errorCode: ErrorCodesEnum | undefined = error.response?.data?.code;
+                let errorMessage = defaultErrorMessage;
+
+                if (errorCode) {
+                    errorMessage = errorCodeMessages[errorCode];
+                }
+
+                enqueueSnackbar({
+                    message: errorMessage,
+                    variant: "error",
+                });
+            } else {
+                enqueueSnackbar({
+                    message: defaultErrorMessage,
+                    variant: "error",
+                });
+            }
         }
 
         setIsLoading(false);
