@@ -21,6 +21,8 @@ import {
 } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { ControlledTextField } from "../../../../components/form/controlled-textfield";
+import { ControlledSelect } from "../../../../components/form/controlled-select";
+import { studyCourseOptions } from "./constants";
 
 export function RegisterForm() {
     const [showSuccess, setShowSuccess] = useState(false);
@@ -71,27 +73,11 @@ export function RegisterForm() {
                         <ControlledTextField name="email" label="Email" />
                     </Grid>
                     <Grid size={{ xs: 12 }}>
-                        <FormControl fullWidth error={!!form.formState.errors.study_course}>
-                            <InputLabel id="study-course-label">Curso</InputLabel>
-                            <Select
-                                labelId="study-course-label"
-                                id="study_course"
-                                label="Curso"
-                                {...form.register("study_course")}>
-                                <MenuItem value="Ciência da Computação">
-                                    Ciência da Computação
-                                </MenuItem>
-                                <MenuItem value="Química">Química</MenuItem>
-                                <MenuItem value="Engenharia Ambiental">
-                                    Engenharia Ambiental
-                                </MenuItem>
-                            </Select>
-                            {form.formState.errors.study_course && (
-                                <Typography variant="caption" color="error">
-                                    {form.formState.errors.study_course.message}
-                                </Typography>
-                            )}
-                        </FormControl>
+                        <ControlledSelect
+                            label="Curso"
+                            name="study_course"
+                            options={studyCourseOptions}
+                        />
                     </Grid>
                     <Grid size={{ xs: 12, sm: 6 }}>
                         <ControlledTextField name="password" label="Senha" type="password" />
