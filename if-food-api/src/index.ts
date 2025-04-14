@@ -3,6 +3,8 @@ import express from "express";
 import http from "node:http";
 import cors from "cors";
 import { frontConfig } from "./config";
+import "express-async-errors";
+import { errorHandler } from "@controllers/middlewares/error-handler";
 
 export function buildApp() {
     const app = express();
@@ -16,6 +18,7 @@ export function buildApp() {
         }),
     );
     app.use("/api/v1", getV1Routes());
+    app.use(errorHandler);
 
     return http.createServer(app);
 }
