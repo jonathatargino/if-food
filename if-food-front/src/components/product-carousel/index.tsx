@@ -67,7 +67,11 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
 
     return (
         <>
-            <Box sx={{ position: "relative", marginBottom: isControlsVisible ? "24px" : "0" }}>
+            <Box
+                sx={{
+                    position: "relative",
+                    marginBottom: isControlsVisible ? "24px" : "0",
+                }}>
                 <Box ref={sliderRef} className="keen-slider">
                     {products.map((product) => (
                         <ProductCard key={product.id} {...product} className="keen-slider__slide" />

@@ -18,10 +18,10 @@ export function ProductCard({ name, photo_url, seller_name, value, className }: 
         <Card
             className={className}
             sx={{
-                height: "100%",
                 display: "flex",
                 flexDirection: "column",
                 transition: "box-shadow 0.3s",
+                marginBottom: "8px",
                 "&:hover": {
                     boxShadow: 6,
                 },
@@ -31,13 +31,10 @@ export function ProductCard({ name, photo_url, seller_name, value, className }: 
                 image={photo_url}
                 alt={name}
                 sx={{
-                    height: 200,
-                    width: "100%",
-                    objectFit: "cover",
-                    objectPosition: "center",
+                    aspectRatio: "1/1",
                 }}
             />
-            <CardContent sx={{ flexGrow: 1, p: 2 }}>
+            <CardContent sx={{ p: 2 }}>
                 <Typography
                     variant="h6"
                     component="h3"
