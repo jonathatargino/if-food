@@ -100,7 +100,7 @@ export function Products() {
 
     return (
         <Fade in={!isLoading} timeout={500}>
-            <Container maxWidth="xl" sx={{ py: 4 }}>
+            <Container sx={{ py: 4 }}>
                 <Box sx={{ display: "flex", justifyContent: "center", mb: 6 }}>
                     <SearchInput value={searchTerm} onChange={setSearchTerm} />
                 </Box>
