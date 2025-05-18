@@ -1,8 +1,8 @@
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { ProductCard } from "../ProductCard";
-import { Box } from "@mui/material";
-import { useState } from "react";
+import { Box, useMediaQuery } from "@mui/material";
+import { useEffect, useState } from "react";
 import { DotsControl } from "./components/dots-control";
 import { ArrowsControl } from "./components/arrows-control";
 
@@ -21,6 +21,8 @@ interface ProductCarouselProps {
 export function ProductCarousel({ products }: ProductCarouselProps) {
     const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [slidesPerView, setSlidesPerView] = useState(0);
+    const shouldShowArrows = useMediaQuery("(min-width: 480px)");
 
     const [sliderRef, instanceRef] = useKeenSlider({
         initial: 0,
@@ -62,7 +64,18 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
         },
     });
 
-    const slidesPerView = instanceRef?.current?.options.slides.perView ?? 0;
+    useEffect(() => {
+        setSlidesPerView(instanceRef?.current?.options.slides.perView ?? 0);
+
+        function handleWindowResize() {
+            setSlidesPerView(instanceRef?.current?.options.slides.perView ?? 0);
+        }
+
+        window.addEventListener("resize", handleWindowResize);
+
+        return () => window.removeEventListener("resize", handleWindowResize);
+    }, [instanceRef]);
+
     const isControlsVisible = isLoaded && products.length > slidesPerView;
 
     return (
@@ -80,7 +93,7 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                 <ArrowsControl
                     onLeftArrowClick={() => instanceRef.current?.prev()}
                     onRightArrowClick={() => instanceRef.current?.next()}
-                    isVisible={isControlsVisible}
+                    isVisible={isControlsVisible && shouldShowArrows}
                 />
             </Box>
             <DotsControl
