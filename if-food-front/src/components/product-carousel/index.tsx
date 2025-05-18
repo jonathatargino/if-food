@@ -94,6 +94,9 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                     onLeftArrowClick={() => instanceRef.current?.prev()}
                     onRightArrowClick={() => instanceRef.current?.next()}
                     isVisible={isControlsVisible && shouldShowArrows}
+                    currentSlideIndex={currentSlideIndex}
+                    totalSlidesNumber={products.length}
+                    slidesPerView={slidesPerView}
                 />
             </Box>
             <DotsControl
