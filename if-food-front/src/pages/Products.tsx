@@ -1,5 +1,15 @@
 import { useState, useMemo, useEffect } from "react";
-import { Box, Container, Stack, Typography, Divider, Fade, Skeleton } from "@mui/material";
+import {
+    Box,
+    Container,
+    Stack,
+    Typography,
+    Divider,
+    Fade,
+    Skeleton,
+    useTheme,
+    useMediaQuery,
+} from "@mui/material";
 import { ProductCard } from "../components/ProductCard";
 import { ProductCarousel } from "../components/product-carousel";
 import { StoreCard } from "../components/StoreCard";
@@ -12,6 +22,8 @@ import NewReleasesIcon from "@mui/icons-material/NewReleases";
 export function Products() {
     const [searchTerm, setSearchTerm] = useState("");
     const [isLoading, setIsLoading] = useState(true);
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
     const [favoriteStores, setFavoriteStores] = useState(
         new Set(mockStores.filter((store) => store.is_favorite).map((store) => store.id)),
     );
@@ -75,7 +87,7 @@ export function Products() {
 
     if (isLoading) {
         return (
-            <Container maxWidth="xl" sx={{ py: 4 }}>
+            <Container sx={{ py: 4 }}>
                 <Box sx={{ display: "flex", justifyContent: "center", mb: 6 }}>
                     <Skeleton width={400} height={56} />
                 </Box>
@@ -100,27 +112,78 @@ export function Products() {
 
     return (
         <Fade in={!isLoading} timeout={500}>
-            <Container sx={{ py: 4 }}>
+            <Container sx={{ py: 4, maxWidth: "100%" }}>
+                {isMobile && (
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: 2,
+                            mb: 4,
+                        }}>
+                        <img
+                            src={"pizza.svg"}
+                            alt={"Logo do IF Food, uma fatia de pizza"}
+                            style={{ height: "48px" }}
+                        />
+                        <Typography
+                            variant="h3"
+                            component="h1"
+                            sx={{
+                                fontWeight: "bold",
+                                color: theme.palette.primary.main,
+                                fontSize: { xs: "2rem", sm: "3rem" },
+                            }}>
+                            IF FOOD
+                        </Typography>
+                    </Box>
+                )}
+
                 <Box sx={{ display: "flex", justifyContent: "center", mb: 6 }}>
                     <SearchInput value={searchTerm} onChange={setSearchTerm} />
                 </Box>
 
                 {salgadosProducts.length > 0 && (
-                    <Box sx={{ mb: 6 }}>
+                    <Box
+                        sx={{
+                            mb: 6,
+                            maxWidth: {
+                                xs: "100%",
+                                md: "calc(100% - 240px)",
+                                xl: "100%",
+                            },
+                        }}>
                         <SectionTitle icon={RestaurantIcon} title="Salgados Populares" />
                         <ProductCarousel products={salgadosProducts} />
                     </Box>
                 )}
 
                 {docesProducts.length > 0 && (
-                    <Box sx={{ mb: 6 }}>
+                    <Box
+                        sx={{
+                            mb: 6,
+                            maxWidth: {
+                                xs: "100%",
+                                md: "calc(100% - 240px)",
+                                xl: "100%",
+                            },
+                        }}>
                         <SectionTitle icon={CakeIcon} title="Doces Populares" />
                         <ProductCarousel products={docesProducts} />
                     </Box>
                 )}
 
                 {newProducts.length > 0 && (
-                    <Box sx={{ mb: 6 }}>
+                    <Box
+                        sx={{
+                            mb: 6,
+                            maxWidth: {
+                                xs: "100%",
+                                md: "calc(100% - 240px)",
+                                xl: "100%",
+                            },
+                        }}>
                         <SectionTitle icon={NewReleasesIcon} title="Novidades" />
                         <ProductCarousel products={newProducts} />
                     </Box>
